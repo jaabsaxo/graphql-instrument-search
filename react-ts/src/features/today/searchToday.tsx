@@ -1,15 +1,40 @@
+import React from 'react';
+import AssetTypeImage from '../../Components/AssetTypeImage';
+import CountryImage from '../../Components/CountryImage';
+
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { RootState } from "../../store";
 import { searchToday, setQuery, TodayResult } from "./todaySlice";
-
 
 interface ResultProps {
   result: TodayResult;
 }
 
-
 const TodayResultCard: React.FC<ResultProps> = ({ result }: ResultProps) => {
-  return (<p>{result.symbol}</p>)
+  return (
+    <>
+      <div className='main-wrapper-today'>
+        <div className='sub-wrapper-today'>
+          <AssetTypeImage src={result.assetTypeIconUrl} />
+        </div>
+        <div className='sub-wrapper-today'>
+          <p className='p-today'>{result.description}</p>
+          <br></br>
+          <div className='sub-wrapper-today-details'>
+            <div>
+              <p className='p-today'>{result.symbol}</p>
+            </div>
+            <div>
+              <CountryImage src={result.exchange.country.flagIconUrl} />
+            </div>
+            <div>
+              <p className='p-today'>{result.assetType}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  )
 }
 
 

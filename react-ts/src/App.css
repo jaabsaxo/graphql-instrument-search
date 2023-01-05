@@ -20,3 +20,18 @@
 .sub-wrapper {
   margin: 50px;
 }
+
+.main-wrapper-today {
+  display: flex;
+  border: #88F solid
+}
+
+.sub-wrapper-today {
+  margin: 1px;
+  display: flex;
+}
+
+.p-today {
+  font-weight: 100;
+  margin: 0;
+}
