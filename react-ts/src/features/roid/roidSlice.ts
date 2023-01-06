@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 
-export interface TodayResult {
+export interface RoidResult {
   symbol: string
   description?: string
   assetType?: string
@@ -9,26 +9,34 @@ export interface TodayResult {
     country: {
       flagIconUrl: string
     }
+    mic: string
+    name: string
+    state: string
+    open: string
+    nextState: string
+    nextStateHours: string
+    nextStateMins: string
+    until: string
   }
   assetTypeIconUrl: string
 }
 
-interface TodayState {
+interface RoidState {
   query: string
-  results: TodayResult[]
+  results: RoidResult[]
 }
 
 interface SearchResults {
-  results: TodayResult[]
+  results: RoidResult[]
 }
 
-const initialState: TodayState = {
+const initialState: RoidState = {
   query: '',
   results: []
 }
 
-const todaySlice = createSlice({
-  name: 'today',
+const roidSlice = createSlice({
+  name: 'roid',
   initialState: initialState,
   reducers: {
     setQuery: (state, action: PayloadAction<string>) => {
@@ -40,6 +48,6 @@ const todaySlice = createSlice({
   },
 })
 
-export const { setQuery, setResults } = todaySlice.actions
+export const { setQuery, setResults } = roidSlice.actions
 
-export default todaySlice.reducer
+export default roidSlice.reducer

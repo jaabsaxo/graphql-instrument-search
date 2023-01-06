@@ -1,11 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './features/auth/authSlice'
 import todayReducer from './features/today/todaySlice'
+import enhancedReducer from './features/enhanced/enhancedSlice'
+import roidReducer from './features/roid/roidSlice'
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    today: todayReducer
+    today: todayReducer,
+    enhanced: enhancedReducer,
+    roid: roidReducer
   },
 })
 

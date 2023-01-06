@@ -2,6 +2,8 @@
 import './App.css'
 import SearchToday from './features/today/searchToday'
 import AuthField from './features/auth/AuthField'
+import SearchEnhanced from './features/enhanced/searchEnhanced'
+import SearchOnRoids from './features/roid/searchOnRoids'
 
 function App() {
   return (
@@ -14,10 +16,10 @@ function App() {
           <SearchToday/>
         </div>
         <div className='sub-wrapper'>
-          <SearchToday/>
+          <SearchEnhanced/>
         </div>
         <div className='sub-wrapper'>
-          <SearchToday/>
+          <SearchOnRoids/>
         </div>
       </div>
     </div>
