@@ -19,6 +19,8 @@ export interface RoidResult {
     until: string
   }
   assetTypeIconUrl: string
+  sparkLine: Number[]
+  numPositions: Number
 }
 
 interface RoidState {

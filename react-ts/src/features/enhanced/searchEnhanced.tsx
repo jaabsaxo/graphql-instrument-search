@@ -13,27 +13,34 @@ interface ResultProps {
 const EnhancedResultCard: React.FC<ResultProps> = ({ result }: ResultProps) => {
   return (
     <>
-      <div className='main-wrapper-today'>
-        <div className='sub-wrapper-today'>
-          <AssetTypeImage src={result.assetTypeIconUrl} />
+      <div className='main-horizontal-wrapper-roids'>
+        <div className='horizontal-wrapper'>
+          <div className='vertical-wrapper lined'>
+            <div>
+              <AssetTypeImage src={result.assetTypeIconUrl} />
+            </div>
+            <div className='horizontal-wrapper'>
+              <div>
+                <p className='p-today'>{result.description}</p>
+              </div>
+              <div className='vertical-wrapper'>
+                <div>
+                  <p className='p-today'>{result.symbol}</p>
+                </div>
+                <div>
+                  <CountryImage src={result.exchange.country.flagIconUrl} />
+                </div>
+                <div>
+                  <p className='p-today'>{result.assetType}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className='sub-wrapper-today'>
-          <p className='p-today'>{result.description}</p>
-          <br></br>
-          <div className='sub-wrapper-today-details'>
-            <div>
-              <p className='p-today'>{result.symbol}</p>
-            </div>
-            <div>
-              <CountryImage src={result.exchange.country.flagIconUrl} />
-            </div>
-            <div>
-              <p className='p-today'>{result.assetType}</p>
-            </div>
-            <div>
-              <p className='p-today'>Exchange: {result.exchange.mic}</p>
-              <p className='p-today'>State: {result.exchange.state} ({result.exchange.nextState} in {result.exchange.nextStateHours} hours)</p>
-            </div>
+        <div className='lined'>
+          <div>
+            <p className='p-today'>Exchange: {result.exchange.mic}</p>
+            <p className='p-today'>State: {result.exchange.state} ({result.exchange.nextState} in {result.exchange.nextStateHours} hours)</p>
           </div>
         </div>
       </div>

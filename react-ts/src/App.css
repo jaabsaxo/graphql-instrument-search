@@ -35,3 +35,24 @@
   font-weight: 100;
   margin: 0;
 }
+
+.main-horizontal-wrapper-roids {
+  display: flex;
+  flex-direction: column;
+  border: #777 solid;
+  margin-bottom: 20px;
+}
+
+.horizontal-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.vertical-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.lined {
+  border: #faa solid 1px
+}

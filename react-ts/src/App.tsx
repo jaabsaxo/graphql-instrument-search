@@ -4,6 +4,8 @@ import SearchToday from './features/today/searchToday'
 import AuthField from './features/auth/AuthField'
 import SearchEnhanced from './features/enhanced/searchEnhanced'
 import SearchOnRoids from './features/roid/searchOnRoids'
+import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines';
+
 
 function App() {
   return (
