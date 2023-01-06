@@ -4,8 +4,6 @@ import SearchToday from './features/today/searchToday'
 import AuthField from './features/auth/AuthField'
 import SearchEnhanced from './features/enhanced/searchEnhanced'
 import SearchOnRoids from './features/roid/searchOnRoids'
-import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines';
-
 
 function App() {
   return (
@@ -15,12 +13,15 @@ function App() {
       </div>
       <div className='main-wrapper'>
         <div className='sub-wrapper'>
+          <p>Mobile</p>
           <SearchToday/>
         </div>
         <div className='sub-wrapper'>
+          <p>Web</p>
           <SearchEnhanced/>
         </div>
         <div className='sub-wrapper'>
+          <p>Native</p>
           <SearchOnRoids/>
         </div>
       </div>

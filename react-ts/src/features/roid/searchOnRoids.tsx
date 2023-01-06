@@ -27,10 +27,16 @@ const RoidedResultCard: React.FC<ResultProps> = ({ result }: ResultProps) => {
               </div>
               <div className='vertical-wrapper'>
                 <div>
-                  <p className='p-today'>{result.symbol}</p>
+                  <p className='p-today'>{result.symbol} </p>
                 </div>
                 <div>
-                  <CountryImage src={result.exchange.country.flagIconUrl} />
+                  <p className='p-today'>&#8226;</p>
+                </div>
+                <div>
+                  <CountryImage src={result.exchange.country.flagIconUrl}/>
+                </div>
+                <div>
+                  <p className='p-today'>&#8226;</p>
                 </div>
                 <div>
                   <p className='p-today'>{result.assetType}</p>
@@ -51,7 +57,7 @@ const RoidedResultCard: React.FC<ResultProps> = ({ result }: ResultProps) => {
           </div>
         </div>
         <div className='lined'>
-          <Sparklines data={result.sparkLine} svgHeight={80} limit={20}>
+          <Sparklines data={result.sparkLine} svgHeight={80} limit={30}>
             <SparklinesLine color="#56b45d" />
             <SparklinesSpots size={1}
               style={{ stroke: "#56b45d" }} />
@@ -106,7 +112,7 @@ const SearchOnRoids: React.FC = () => {
 
     const QUERY = `query{
         instruments(search:\"${event.target.value}\") {
-            sparkLine(num: 20)
+            sparkLine(num: 30)
             numPositions
             description
             symbol
@@ -140,6 +146,8 @@ const SearchOnRoids: React.FC = () => {
       }),
       redirect: 'follow'
     };
+
+    // http://127.0.0.1:8000/api https://saxo-graph.deta.dev/api
 
     fetch("https://saxo-graph.deta.dev/api", Options).then(response => response.json()).then(result => {
       dispatch(setResults(result));

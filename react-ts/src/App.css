@@ -39,7 +39,7 @@
 .main-horizontal-wrapper-roids {
   display: flex;
   flex-direction: column;
-  border: #777 solid;
+  border: #777 solid 1px;
   margin-bottom: 20px;
 }
 
