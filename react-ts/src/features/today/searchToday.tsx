@@ -4,7 +4,7 @@ import CountryImage from '../../Components/CountryImage';
 
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { RootState } from "../../store";
-import { searchToday, setQuery, TodayResult } from "./todaySlice";
+import { setQuery, setResults, TodayResult } from "./todaySlice";
 
 interface ResultProps {
   result: TodayResult;
@@ -44,18 +44,24 @@ interface ResultListProps {
 
 
 const ResultList: React.FC<ResultListProps> = ({ results }: ResultListProps) => {
-  if (results.length > 0) {
-    const renderedResults = results.map((r: TodayResult) => {
+  if (results) {
+    if (results.length > 0) {
+      const renderedResults = results.map((r: TodayResult) => {
+        return (
+          <div key={r.symbol+"-"+r.assetType}>
+            <TodayResultCard result={r} />
+          </div>)
+      });
       return (
-        <div key={r.symbol}>
-          <TodayResultCard result={r} />
-        </div>)
-    });
-    return (
-      <>
-        {renderedResults}
-      </>
-    )
+        <>
+          {renderedResults}
+        </>
+      )
+    } else {
+      return (
+        <></>
+      )
+    }
   } else {
     return (
       <></>
@@ -69,15 +75,39 @@ const SearchToday: React.FC = () => {
   const query = useAppSelector((state: RootState) => state.today.query);
   const results = useAppSelector((state: RootState) => state.today.results);
   const token = useAppSelector((state: RootState) => state.auth.token);
-  const onClick = () => {
-    const searchAction = {
-      token: token,
-      query: query
-    }
-    dispatch(searchToday(searchAction));
-  }
   const onChange = (event: any) => {
     dispatch(setQuery(String(event.target.value)));
+
+    const QUERY = `query{
+        instruments(search:\"${event.target.value}\") {
+            description,
+            symbol,
+            assetTypeIconUrl,
+            assetType,
+            exchange{
+              country{
+                flagIconUrl
+              }
+            }
+          }
+        }`
+
+    const Options: any = {
+      method: 'POST',
+      headers: {
+        "Authorization": "Bearer " + token,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        query: QUERY,
+        variables: {}
+      }),
+      redirect: 'follow'
+    };
+
+    fetch("https://saxo-graph.deta.dev/api", Options).then(response => response.json()).then(result => {
+      dispatch(setResults(result));
+    }).catch(error => console.log('error', error));
   }
 
   return (
@@ -87,10 +117,6 @@ const SearchToday: React.FC = () => {
         value={query}
         onChange={onChange}
       />
-      <button
-        onClick={onClick}
-      >Search
-      </button>
       <ResultList results={results} />
     </>
   )
