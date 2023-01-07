@@ -50,11 +50,13 @@ interface ResultListProps {
 
 
 const ResultList: React.FC<ResultListProps> = ({ results }: ResultListProps) => {
+  console.log("new list")
   if (results) {
     if (results.length > 0) {
       const renderedResults = results.map((r: TodayResult) => {
+        console.log("rs:", r.symbol)
         return (
-          <div key={r.symbol + "-" + r.assetType}>
+          <div key={r.symbol + "-" + r.description + '-' + r.displayAssetType}>
             <TodayResultCard result={r} />
           </div>)
       });
