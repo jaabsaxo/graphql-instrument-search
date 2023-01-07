@@ -65,7 +65,7 @@ const GreenDot: React.FC = () => {
 export const ExchangeResultCard: React.FC<ResultProps> = ({ result }: ResultProps) => {
   return (
     <>
-      <div className='lined'>
+      <div >
         <div className='vertical-wrapper'>
           <div>
             <p className='p-text'>{result.exchange.name} ({result.exchange.mic})</p>
@@ -76,9 +76,6 @@ export const ExchangeResultCard: React.FC<ResultProps> = ({ result }: ResultProp
         </div>
         <div>
           <div>
-            <div>
-              <p className='p-text p-text-seconday'>Current: {result.exchange.state} </p>
-            </div>
             <div>
               <p className='p-text p-text-seconday'>Next: {result.exchange.nextState} in {result.exchange.nextStateRemaining} hours</p>
             </div>
@@ -100,7 +97,7 @@ const ResultList: React.FC<ResultListProps> = ({ results }: ResultListProps) => 
       const renderedResults = results.map((r: EnhancedResult) => {
         return (
           <div key={r.symbol + "-" + r.assetType}>
-            <div>
+            <div className='bottom-margin'>
               <TodayResultCard result={r} />
               <ExchangeResultCard result={r} />
             </div>

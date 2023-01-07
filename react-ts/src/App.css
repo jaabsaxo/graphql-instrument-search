@@ -49,8 +49,14 @@
 .main-horizontal-wrapper-roids {
   display: flex;
   flex-direction: column;
-  border: #777 solid 1px;
-  margin-bottom: 20px;
+  border: #777 solid 0px;
+  margin-bottom: 2px;
+  border-bottom: #aaa solid 1px;
+}
+
+.bottom-margin {
+  margin-bottom: 2px;
+  border-bottom: #aaa solid 1px;
 }
 
 .horizontal-wrapper {
@@ -76,7 +82,7 @@
 }
 
 .today-card {
-  border: #777 solid 1px
+  border: #777 solid 0px
 }
 
 .red-dot {

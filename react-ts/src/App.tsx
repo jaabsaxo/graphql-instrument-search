@@ -12,7 +12,7 @@ function App() {
   dispatch(loadTokenFromLocalStorage());
   return (
     <div className="App">
-      <div>
+      <div className='auth'>
         <AuthField/>
       </div>
       <div className='main-wrapper'>

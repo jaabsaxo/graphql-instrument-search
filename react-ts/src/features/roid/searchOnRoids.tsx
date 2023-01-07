@@ -23,10 +23,21 @@ const ExposureCard: React.FC<ResultProps> = ({ result }: ResultProps) => {
     return (
       <>
         <div>
-          <p className='p-text'>Exposure:</p>
-          <p className='p-text p-text-seconday'>positions: {result.positionInfo.numPositions}</p>
-          <p className='p-text p-text-seconday'>exposure: {result.positionInfo.positionExposure}</p>
-          <p className='p-text p-text-seconday'>currency: {result.positionInfo.exposureCurrency}</p>
+          <p className='p-text'>Exposure</p>
+          <div className='vertical-wrapper'>
+            <div>
+            <p className='p-text p-text-seconday'>positions: {result.positionInfo.numPositions}</p>
+            </div>
+            <div>
+              <p className='p-text p-text-seconday'> / </p>
+            </div>
+            <div>
+            <p className='p-text p-text-seconday'>
+            <span>value: {result.positionInfo.positionExposure} {result.positionInfo.exposureCurrency}</span>
+            </p>
+            </div>
+          </div>
+          
         </div>
       </>
     )
@@ -68,10 +79,10 @@ const RoidedResultCard: React.FC<ResultProps> = ({ result }: ResultProps) => {
       <div className='main-horizontal-wrapper-roids'>
         <TodayResultCard result={result} />
         <ExchangeResultCard result={result} />
-        <div className='lined'>
+        <div>
           <ExposureCard result={result} />
         </div>
-        <div className='lined'>
+        <div>
           <Sparkline data={result.sparkLine} />
         </div>
 

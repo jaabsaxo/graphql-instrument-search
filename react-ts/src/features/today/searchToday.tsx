@@ -56,7 +56,7 @@ const ResultList: React.FC<ResultListProps> = ({ results }: ResultListProps) => 
       const renderedResults = results.map((r: TodayResult) => {
         console.log("rs:", r.symbol)
         return (
-          <div key={r.symbol + "-" + r.description + '-' + r.displayAssetType}>
+          <div key={r.symbol + "-" + r.description + '-' + r.displayAssetType} className='bottom-margin'>
             <TodayResultCard result={r} />
           </div>)
       });
