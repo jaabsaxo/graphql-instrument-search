@@ -10,29 +10,30 @@ interface ResultProps {
   result: TodayResult;
 }
 
-const TodayResultCard: React.FC<ResultProps> = ({ result }: ResultProps) => {
+export const TodayResultCard: React.FC<ResultProps> = ({ result }: ResultProps) => {
   return (
     <>
-      <div className='main-horizontal-wrapper-roids'>
-        <div className='horizontal-wrapper'>
-          <div className='vertical-wrapper lined'>
+      <div className='today-card'>
+        <div className='vertical-wrapper'>
+          <div className='top-margin-assetlogo'>
+            <AssetTypeImage src={result.assetTypeIconUrl} />
+          </div>
+          <div className='horizontal-wrapper'>
             <div>
-              <AssetTypeImage src={result.assetTypeIconUrl} />
+              <p className='p-text'>{result.description}</p>
             </div>
-            <div className='horizontal-wrapper'>
+            <div className='vertical-wrapper p-text-seconday '>
               <div>
-                <p className='p-today'>{result.description}</p>
+                <p className='p-text'>{result.symbol} </p>
               </div>
-              <div className='vertical-wrapper'>
-                <div>
-                  <p className='p-today'>{result.symbol}</p>
-                </div>
-                <div>
-                  <CountryImage src={result.exchange.country.flagIconUrl} />
-                </div>
-                <div>
-                  <p className='p-today'>{result.assetType}</p>
-                </div>
+              <div className='left-margin-5'>
+                <CountryImage src={result.exchange.country.flagIconUrl} />
+              </div>
+              <div>
+                <p className='p-text'>&#8226;</p>
+              </div>
+              <div>
+                <p className='p-text'>{result.displayAssetType}</p>
               </div>
             </div>
           </div>
@@ -85,10 +86,10 @@ const SearchToday: React.FC = () => {
 
     const QUERY = `query{
         instruments(search:\"${event.target.value}\") {
-            description,
-            symbol,
-            assetTypeIconUrl,
-            assetType,
+            description
+            symbol
+            assetTypeIconUrl
+            displayAssetType
             exchange{
               country{
                 flagIconUrl

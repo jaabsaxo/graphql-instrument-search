@@ -1,5 +1,6 @@
 #root {
   max-width: 1280px;
+  min-height: 3000px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -31,9 +32,15 @@
   display: flex;
 }
 
-.p-today {
+.p-text {
   font-weight: 100;
   margin: 0;
+  text-align: left;
+  margin-left: 5px;
+}
+
+.p-text-seconday {
+  font-size: small;
 }
 
 .main-horizontal-wrapper-roids {
@@ -54,5 +61,37 @@
 }
 
 .lined {
-  border: #faa solid 1px
+  border: #777 solid 1px
+}
+
+.left-margin-5 {
+  margin-left: 5px;
+}
+
+.top-margin-assetlogo {
+  margin-top: 8px;
+}
+
+.today-card {
+  border: #777 solid 1px
+}
+
+.red-dot {
+  background-color: #f00;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  margin-left: 5px;
+  position: relative;
+  top: 8px;
+}
+
+.green-dot {
+  background-color: #0f0;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  margin-left: 5px;
+  position: relative;
+  top: 8px;
 }

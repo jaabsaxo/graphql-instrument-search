@@ -5,6 +5,7 @@ export interface RoidResult {
   symbol: string
   description?: string
   assetType?: string
+  displayAssetType: string
   exchange: {
     country: {
       flagIconUrl: string
@@ -14,13 +15,16 @@ export interface RoidResult {
     state: string
     open: string
     nextState: string
-    nextStateHours: string
-    nextStateMins: string
+    nextStateRemaining: string
     until: string
   }
   assetTypeIconUrl: string
   sparkLine: Number[]
-  numPositions: Number
+  positionInfo: {
+    exposureCurrency: string
+    positionExposure: number
+    numPositions: number
+  }
 }
 
 interface RoidState {

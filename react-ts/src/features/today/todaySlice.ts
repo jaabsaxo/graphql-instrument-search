@@ -5,6 +5,7 @@ export interface TodayResult {
   symbol: string
   description?: string
   assetType?: string
+  displayAssetType: string
   exchange: {
     country: {
       flagIconUrl: string

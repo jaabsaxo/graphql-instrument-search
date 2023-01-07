@@ -7,63 +7,71 @@ import { RootState } from "../../store";
 import { setQuery, setResults, RoidResult } from "./roidSlice";
 
 import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines';
+import { TodayResultCard } from '../today/searchToday';
+import { ExchangeResultCard } from '../enhanced/searchEnhanced';
 
 interface ResultProps {
   result: RoidResult;
+}
+
+const ExposureCard: React.FC<ResultProps> = ({ result }: ResultProps) => {
+  if (result.positionInfo.positionExposure == 0) {
+    return (
+      <></>
+    )
+  } else {
+    return (
+      <>
+        <div>
+          <p className='p-text'>Exposure:</p>
+          <p className='p-text p-text-seconday'>positions: {result.positionInfo.numPositions}</p>
+          <p className='p-text p-text-seconday'>exposure: {result.positionInfo.positionExposure}</p>
+          <p className='p-text p-text-seconday'>currency: {result.positionInfo.exposureCurrency}</p>
+        </div>
+      </>
+    )
+  }
+
+}
+
+interface SparkProps {
+  data: Number[]
+}
+
+const Sparkline: React.FC<SparkProps> = ({ data }: SparkProps) => {
+  if (data) {
+    let color = "#fff"
+    if (data[0] > data[data.length - 1]) {
+      color = "#ff0000"
+    } else {
+      color = "#56b45d"
+    }
+    return (
+      <>
+        <p className='p-text'> Price the past 30 days</p>
+        <Sparklines data={data} svgHeight={80} limit={30}>
+          <SparklinesLine color={color} />
+          <SparklinesSpots size={1}
+            style={{ stroke: color }} />
+        </Sparklines>
+      </>
+    )
+  }
 }
 
 const RoidedResultCard: React.FC<ResultProps> = ({ result }: ResultProps) => {
   return (
     <>
       <div className='main-horizontal-wrapper-roids'>
-        <div className='horizontal-wrapper'>
-          <div className='vertical-wrapper lined'>
-            <div>
-              <AssetTypeImage src={result.assetTypeIconUrl} />
-            </div>
-            <div className='horizontal-wrapper'>
-              <div>
-                <p className='p-today'>{result.description}</p>
-              </div>
-              <div className='vertical-wrapper'>
-                <div>
-                  <p className='p-today'>{result.symbol} </p>
-                </div>
-                <div>
-                  <p className='p-today'>&#8226;</p>
-                </div>
-                <div>
-                  <CountryImage src={result.exchange.country.flagIconUrl}/>
-                </div>
-                <div>
-                  <p className='p-today'>&#8226;</p>
-                </div>
-                <div>
-                  <p className='p-today'>{result.assetType}</p>
-                </div>
-              </div>
-            </div>
-          </div>
+        <TodayResultCard result={result} />
+        <ExchangeResultCard result={result} />
+        <div className='lined'>
+          <ExposureCard result={result} />
         </div>
         <div className='lined'>
-          <div>
-            <p className='p-today'>Exchange: {result.exchange.mic}</p>
-            <p className='p-today'>State: {result.exchange.state} ({result.exchange.nextState} in {result.exchange.nextStateHours} hours)</p>
-          </div>
+          <Sparkline data={result.sparkLine} />
         </div>
-        <div className='lined'>
-          <div>
-            <p className='p-today'>Positions: {result.numPositions}</p>
-          </div>
-        </div>
-        <div className='lined'>
-          <Sparklines data={result.sparkLine} svgHeight={80} limit={30}>
-            <SparklinesLine color="#56b45d" />
-            <SparklinesSpots size={1}
-              style={{ stroke: "#56b45d" }} />
-          </Sparklines>
-        </div>
-        
+
       </div>
     </>
   )
@@ -113,11 +121,16 @@ const SearchOnRoids: React.FC = () => {
     const QUERY = `query{
         instruments(search:\"${event.target.value}\") {
             sparkLine(num: 30)
-            numPositions
+            positionInfo{
+              exposureCurrency
+              positionExposure
+              numPositions
+            }
             description
             symbol
             assetTypeIconUrl
             assetType
+            displayAssetType
             exchange{
               country{
                 flagIconUrl
@@ -127,8 +140,7 @@ const SearchOnRoids: React.FC = () => {
               state
               open
               nextState
-              nextStateHours
-              nextStateMins
+              nextStateRemaining
               until
             }
           }

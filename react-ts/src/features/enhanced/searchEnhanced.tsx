@@ -4,50 +4,90 @@ import CountryImage from '../../Components/CountryImage';
 
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { RootState } from "../../store";
+import { TodayResultCard } from '../today/searchToday';
 import { setQuery, setResults, EnhancedResult } from "./enhancedSlice";
 
 interface ResultProps {
   result: EnhancedResult;
 }
 
-const EnhancedResultCard: React.FC<ResultProps> = ({ result }: ResultProps) => {
-  return (
-    <>
-      <div className='main-horizontal-wrapper-roids'>
-        <div className='horizontal-wrapper'>
-          <div className='vertical-wrapper lined'>
-            <div>
-              <AssetTypeImage src={result.assetTypeIconUrl} />
-            </div>
-            <div className='horizontal-wrapper'>
-              <div>
-                <p className='p-today'>{result.description}</p>
-              </div>
-              <div className='vertical-wrapper'>
-                <div>
-                  <p className='p-today'>{result.symbol}</p>
-                </div>
-                <div>
-                  <CountryImage src={result.exchange.country.flagIconUrl} />
-                </div>
-                <div>
-                  <p className='p-today'>{result.assetType}</p>
-                </div>
-              </div>
-            </div>
+
+interface OpenCloseProps {
+  open: boolean
+}
+
+const OpenClose: React.FC<OpenCloseProps> = ({ open }: OpenCloseProps) => {
+  if (open = true) {
+    return (
+      <>
+        <div className='vertical-wrapper'>
+          <div>
+            <GreenDot />
+          </div>
+          <div>
+            <p className='p-text p-text-seconday'>Open</p>
           </div>
         </div>
-        <div className='lined'>
+      </>
+    )
+  } else {
+    return (
+      <>
+        <div className='vertical-wrapper'>
           <div>
-            <p className='p-today'>Exchange: {result.exchange.mic}</p>
-            <p className='p-today'>State: {result.exchange.state} ({result.exchange.nextState} in {result.exchange.nextStateHours} hours)</p>
+            <RedDot />
+          </div>
+          <div>
+            <p className='p-text p-text-seconday'>Closed</p>
+          </div>
+        </div>
+      </>
+    )
+  }
+}
+
+const RedDot: React.FC = () => {
+  return (
+    <>
+      <div className='red-dot'></div>
+    </>
+  )
+}
+
+const GreenDot: React.FC = () => {
+  return (
+    <>
+      <div className='green-dot'></div>
+    </>
+  )
+}
+
+export const ExchangeResultCard: React.FC<ResultProps> = ({ result }: ResultProps) => {
+  return (
+    <>
+      <div className='lined'>
+        <div className='vertical-wrapper'>
+          <div>
+            <p className='p-text'>{result.exchange.name} ({result.exchange.mic})</p>
+          </div>
+          <div>
+            <OpenClose open={result.exchange.open} />
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <p className='p-text p-text-seconday'>Current: {result.exchange.state} </p>
+            </div>
+            <div>
+              <p className='p-text p-text-seconday'>Next: {result.exchange.nextState} in {result.exchange.nextStateRemaining} hours</p>
+            </div>
           </div>
         </div>
       </div>
     </>
   )
 }
-
 
 interface ResultListProps {
   results: EnhancedResult[];
@@ -59,8 +99,11 @@ const ResultList: React.FC<ResultListProps> = ({ results }: ResultListProps) => 
     if (results.length > 0) {
       const renderedResults = results.map((r: EnhancedResult) => {
         return (
-          <div key={r.symbol+"-"+r.assetType}>
-            <EnhancedResultCard result={r} />
+          <div key={r.symbol + "-" + r.assetType}>
+            <div>
+              <TodayResultCard result={r} />
+              <ExchangeResultCard result={r} />
+            </div>
           </div>)
       });
       return (
@@ -91,21 +134,21 @@ const SearchEnhanced: React.FC = () => {
 
     const QUERY = `query{
         instruments(search:\"${event.target.value}\") {
-            description,
-            symbol,
-            assetTypeIconUrl,
-            assetType,
+            description
+            symbol
+            assetTypeIconUrl
+            assetType
+            displayAssetType
             exchange{
               country{
                 flagIconUrl
               }
-              mic,
-              name,
-              state,
-              open,
-              nextState,
-              nextStateHours,
-              nextStateMins,
+              mic
+              name
+              state
+              open
+              nextState
+              nextStateRemaining
               until
             }
           }

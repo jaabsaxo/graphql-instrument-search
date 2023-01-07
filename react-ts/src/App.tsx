@@ -4,8 +4,12 @@ import SearchToday from './features/today/searchToday'
 import AuthField from './features/auth/AuthField'
 import SearchEnhanced from './features/enhanced/searchEnhanced'
 import SearchOnRoids from './features/roid/searchOnRoids'
+import { useAppDispatch, useAppSelector } from "./hooks"
+import { loadTokenFromLocalStorage } from './features/auth/authSlice'
 
 function App() {
+  const dispatch = useAppDispatch();
+  dispatch(loadTokenFromLocalStorage());
   return (
     <div className="App">
       <div>
