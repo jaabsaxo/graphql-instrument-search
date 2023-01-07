@@ -17,7 +17,7 @@ interface OpenCloseProps {
 }
 
 const OpenClose: React.FC<OpenCloseProps> = ({ open }: OpenCloseProps) => {
-  if (open = true) {
+  if (open === true) {
     return (
       <>
         <div className='vertical-wrapper'>
