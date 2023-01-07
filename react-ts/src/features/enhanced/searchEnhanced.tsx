@@ -13,11 +13,11 @@ interface ResultProps {
 
 
 interface OpenCloseProps {
-  open: boolean
+  open: string
 }
 
 const OpenClose: React.FC<OpenCloseProps> = ({ open }: OpenCloseProps) => {
-  if (open === true) {
+  if (open === String(true)) {
     return (
       <>
         <div className='vertical-wrapper'>

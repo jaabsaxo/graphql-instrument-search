@@ -19,7 +19,7 @@ export interface RoidResult {
     until: string
   }
   assetTypeIconUrl: string
-  sparkLine: Number[]
+  sparkLine: number[]
   positionInfo: {
     exposureCurrency: string
     positionExposure: number
@@ -33,8 +33,10 @@ interface RoidState {
 }
 
 interface SearchResults {
-  results: RoidResult[]
-}
+    data: {
+      instruments: RoidResult[]
+    }
+} 
 
 const initialState: RoidState = {
   query: '',

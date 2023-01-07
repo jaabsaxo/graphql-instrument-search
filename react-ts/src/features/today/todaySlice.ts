@@ -19,9 +19,13 @@ interface TodayState {
   results: TodayResult[]
 }
 
+
 interface SearchResults {
-  results: TodayResult[]
-}
+  data: {
+    instruments: TodayResult[]
+  }
+} 
+
 
 const initialState: TodayState = {
   query: '',
