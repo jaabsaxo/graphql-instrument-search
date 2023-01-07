@@ -27,8 +27,10 @@ interface EnhancedState {
 }
 
 interface SearchResults {
-  results: EnhancedResult[]
-}
+  data: {
+    instruments: EnhancedResult[]
+  }
+} 
 
 const initialState: EnhancedState = {
   query: '',

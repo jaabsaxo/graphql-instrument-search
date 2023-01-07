@@ -35,7 +35,7 @@ const ExposureCard: React.FC<ResultProps> = ({ result }: ResultProps) => {
 }
 
 interface SparkProps {
-  data: Number[]
+  data: number[]
 }
 
 const Sparkline: React.FC<SparkProps> = ({ data }: SparkProps) => {
@@ -56,7 +56,10 @@ const Sparkline: React.FC<SparkProps> = ({ data }: SparkProps) => {
         </Sparklines>
       </>
     )
-  }
+  } else {
+    return (
+      <></>
+    )} 
 }
 
 const RoidedResultCard: React.FC<ResultProps> = ({ result }: ResultProps) => {
