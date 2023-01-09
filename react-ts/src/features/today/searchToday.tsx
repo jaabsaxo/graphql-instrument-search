@@ -50,7 +50,6 @@ interface ResultListProps {
 
 
 const ResultList: React.FC<ResultListProps> = ({ results }: ResultListProps) => {
-  console.log("new list")
   if (results) {
     if (results.length > 0) {
       const renderedResults = results.map((r: TodayResult) => {
@@ -113,7 +112,7 @@ const SearchToday: React.FC = () => {
       redirect: 'follow'
     };
 
-    fetch("https://saxo-graph.deta.dev/api", Options).then(response => response.json()).then(result => {
+    fetch("https://devbox.gid.works/", Options).then(response => response.json()).then(result => {
       dispatch(setResults(result));
     }).catch(error => console.log('error', error));
   }

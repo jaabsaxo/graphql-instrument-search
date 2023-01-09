@@ -17,7 +17,7 @@ interface OpenCloseProps {
 }
 
 const OpenClose: React.FC<OpenCloseProps> = ({ open }: OpenCloseProps) => {
-  if (open === String(true)) {
+  if (open.toString() == "true") {
     return (
       <>
         <div className='vertical-wrapper'>
@@ -164,7 +164,7 @@ const SearchEnhanced: React.FC = () => {
       redirect: 'follow'
     };
 
-    fetch("https://saxo-graph.deta.dev/api", Options).then(response => response.json()).then(result => {
+    fetch("https://devbox.gid.works/", Options).then(response => response.json()).then(result => {
       dispatch(setResults(result));
     }).catch(error => console.log('error', error));
   }

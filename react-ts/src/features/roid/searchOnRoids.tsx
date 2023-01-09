@@ -175,7 +175,7 @@ const SearchOnRoids: React.FC = () => {
 
     // http://127.0.0.1:8000/api https://saxo-graph.deta.dev/api
 
-    fetch("https://saxo-graph.deta.dev/api", Options).then(response => response.json()).then(result => {
+    fetch("https://devbox.gid.works/", Options).then(response => response.json()).then(result => {
       dispatch(setResults(result));
     }).catch(error => console.log('error', error));
   }
